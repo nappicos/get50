@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🚀 Инклюзивное образование · Блок 5 (201–250) · Космический тест</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(ellipse at 30% 40%, #010110, #000000);
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .star {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: starGlow 4s infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes starGlow {
+            0% { opacity: 0.2; transform: scale(0.8); box-shadow: 0 0 2px #fff; }
+            100% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 12px #ffec9e; }
+        }
+        .planet { position: fixed; font-size: 3rem; pointer-events: none; z-index: 0; filter: drop-shadow(0 0 15px cyan); }
+        .earth { top: 15%; left: 5%; animation: floatEarth 20s infinite alternate; }
+        .moon { bottom: 10%; right: 5%; animation: floatMoon 18s infinite alternate; }
+        .mars { top: 60%; left: 85%; animation: floatMars 22s infinite alternate; }
+        .rocket { position: fixed; bottom: 5%; left: 2%; font-size: 3rem; pointer-events: none; animation: flyRocket 20s infinite linear; z-index: 0; }
+        @keyframes floatEarth { 0% { transform: translate(0,0); } 100% { transform: translate(40px,30px); } }
+        @keyframes floatMoon { 0% { transform: translate(0,0); } 100% { transform: translate(-30px,-20px); } }
+        @keyframes floatMars { 0% { transform: translate(0,0); } 100% { transform: translate(50px,-30px); } }
+        @keyframes flyRocket { 0% { transform: translateX(0) translateY(0); } 100% { transform: translateX(1800px) translateY(-300px); } }
+        .quiz-wrapper {
+            max-width: 1000px; width: 100%; margin: 0 auto;
+            background: rgba(3, 8, 20, 0.7); backdrop-filter: blur(12px);
+            border-radius: 70px; padding: 1.8rem 2rem;
+            border: 2px solid rgba(0, 200, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(0,150,255,0.4);
+            z-index: 2;
+        }
+        h1 { font-size: 2rem; background: linear-gradient(135deg,#aaddff,#3388ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .top-bar { display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; }
+        .stats { display: flex; gap: 12px; background: #0a1020cc; border-radius: 70px; padding: 10px 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .stat-card { background: #0a1a2a; padding: 7px 18px; border-radius: 40px; color: #ddf4ff; }
+        .progress-area { display: flex; gap: 18px; margin: 15px 0; align-items: center; flex-wrap: wrap; }
+        .progress-bar-bg { flex:1; background: #1a2a3a; height: 28px; border-radius: 60px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg,#44aaff,#2288cc); transition: width 0.5s; }
+        .question-card { background: #0a1022ee; border-radius: 52px; padding: 28px; border: 1px solid #44aaff; }
+        .question-text { font-size: 1.5rem; background: #11223c; border-radius: 60px; padding: 20px; text-align: center; margin-bottom: 25px; color: #f0fcff; }
+        .options { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+        .option { background: #1a2a3e; border: 1px solid #5599dd; border-radius: 80px; padding: 12px 24px; cursor: pointer; color: #e6f7ff; display: flex; gap: 18px; align-items: center; }
+        .option.selected { background: #3a5a80; border-color: #aaffff; box-shadow: 0 0 12px cyan; }
+        .opt-letter { font-weight: bold; background: #0a1a2a; width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 60px; }
+        .feedback { background: #051020; border-radius: 56px; padding: 16px 28px; margin: 15px 0 20px; font-size: 1.2rem; font-weight: bold; text-align: center; border: 1px solid #00ffff; color: #00ffff; text-shadow: 0 0 8px #00ffff, 0 0 12px #0088ff; box-shadow: 0 0 15px rgba(0,255,255,0.3); }
+        .btn { border: none; padding: 12px 34px; border-radius: 60px; font-weight: bold; font-size: 1.1rem; cursor: pointer; color: white; margin: 5px; }
+        .btn-check { background: #0066cc; box-shadow: 0 0 12px #00aaff, 0 4px 0 #003366; }
+        .btn-check:hover { background: #0088ff; box-shadow: 0 0 20px #00aaff; }
+        .btn-next { background: #0099cc; box-shadow: 0 0 12px #00ffff, 0 4px 0 #006699; }
+        .btn-next:hover { background: #00bbff; box-shadow: 0 0 20px #00ffff; }
+        .btn-restart { background: #3a2a6e; box-shadow: 0 4px 0 #1a1a4a; }
+        .hidden { display: none; }
+        .review { background: #0a1022ee; border-radius: 52px; padding: 28px; margin-top: 30px; }
+        .mistake-item { background: #1a2a40; padding: 12px; border-radius: 40px; margin-bottom: 10px; color: #ddf4ff; }
+        .inspire { background: rgba(10,20,40,0.8); border-radius: 60px; padding: 14px; text-align: center; margin-bottom: 20px; border: 1px solid cyan; }
+        .motivation-text { font-size: 1rem; font-style: italic; color: #cceeff; }
+        @media (max-width: 768px) { .quiz-wrapper { padding: 1rem; } .question-text { font-size: 1.2rem; } }
+    </style>
+</head>
+<body>
+<div class="planet earth">🌍</div><div class="planet moon">🌙</div><div class="planet mars">🪐</div>
+<div class="rocket">🚀</div>
+<script>
+    for(let i=0;i<150;i++){let s=document.createElement('div');s.classList.add('star');let sz=Math.random()*3+1;s.style.width=sz+'px';s.style.height=sz+'px';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*6+'s';document.body.appendChild(s);}
+</script>
+
+<div class="quiz-wrapper" id="quizMain">
+    <div class="top-bar"><h1>🏥 Инклюзивное образование · 201–250</h1><div>📘 Всего 50</div></div>
+    <div class="inspire" id="inspireBox"><span class="motivation-text">✨ Добро пожаловать в тест! ✨</span></div>
+    <div id="startScreen" style="text-align:center; padding:50px 0;"><button class="btn btn-check" id="startBtn" style="font-size:2rem;">🌌 Начать тест 🚀</button></div>
+    <div id="quizInterface" class="hidden">
+        <div class="stats"><div class="stat-card">✅ Верно: <span id="correctCount">0</span></div><div class="stat-card">❌ Ошибки: <span id="mistakeCount">0</span></div><div class="stat-card">🎯 Точность: <span id="accuracyPercent">0</span>%</div><div class="stat-card">📝 Отвечено: <span id="answeredCount">0</span></div><div class="stat-card">🌌 Осталось: <span id="remainingCount">50</span></div></div>
+        <div class="progress-area"><div class="progress-bar-bg"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text" id="progressFraction">0/50</div></div>
+        <div class="question-card"><div class="question-text" id="questionDisplay"></div><div class="options" id="optionsContainer"></div><div class="feedback" id="feedbackArea">✨ Выбери ответ → «Проверить» ✨</div><div class="button-group"><button class="btn btn-check" id="checkBtn">✅ Проверить</button><button class="btn btn-next" id="nextBtn">➡ Следующий</button></div></div>
+        <div class="restart-area"><button class="btn btn-restart" id="restartBtn">🔄 Начать заново</button></div>
+        <div id="reviewBlock" class="review hidden"><h3 style="color:#aaffdd;">📖 Разбор ошибок</h3><div id="mistakeList"></div><button class="btn btn-restart" id="restartReviewBtn">🚀 Пройти заново</button></div>
+    </div>
+</div>
+
+<script>
+    const questionsData = [
+        { text: "Дети с нарушением слуха нуждаются в:", options: ["Специальных условиях коммуникации", "Изоляции", "Формальном обучении", "Снижении нагрузки"], correct: "Специальных условиях коммуникации" },
+        { text: "Дети с нарушением зрения нуждаются в:", options: ["Адаптированных учебных материалах", "Освобождении от обучения", "Изоляции", "Формализме"], correct: "Адаптированных учебных материалах" },
+        { text: "Дети с нарушением опорно-двигательного аппарата нуждаются в:", options: ["Безбарьерной среде", "Домашнем обучении", "Изоляции", "Формальном подходе"], correct: "Безбарьерной среде" },
+        { text: "Дети с расстройствами аутистического спектра нуждаются в:", options: ["Структурированной и поддерживающей среде", "Изоляции", "Жёстком контроле", "Формализме"], correct: "Структурированной и поддерживающей среде" },
+        { text: "Дети с задержкой психического развития нуждаются в:", options: ["Адаптации темпа обучения", "Изоляции", "Исключении", "Формальном подходе"], correct: "Адаптации темпа обучения" },
+        { text: "Адаптация учебного процесса предполагает:", options: ["Изменение методов и форм обучения", "Снижение требований", "Формализм", "Контроль"], correct: "Изменение методов и форм обучения" },
+        { text: "Адаптация учебных помещений направлена на:", options: ["Обеспечение доступности", "Формальный ремонт", "Контроль", "Изоляцию"], correct: "Обеспечение доступности" },
+        { text: "Инклюзивная среда должна быть:", options: ["Комфортной и безопасной", "Жёсткой", "Формальной", "Закрытой"], correct: "Комфортной и безопасной" },
+        { text: "Роль заведующего образовательного учреждения заключается в:", options: ["Организации инклюзивной среды", "Контроле знаний", "Медицинском сопровождении", "Изоляции"], correct: "Организации инклюзивной среды" },
+        { text: "Руководитель учреждения отвечает за:", options: ["Создание условий для инклюзии", "Формализм", "Контроль", "Сегрегацию"], correct: "Создание условий для инклюзии" },
+        { text: "Обязанности педагога в инклюзивном образовании включают:", options: ["Адаптацию методов обучения", "Изоляцию детей", "Контроль родителей", "Формальный подход"], correct: "Адаптацию методов обучения" },
+        { text: "Учитель инклюзивного класса должен уметь:", options: ["Работать с разными детьми", "Только объяснять материал", "Контролировать дисциплину", "Работать формально"], correct: "Работать с разными детьми" },
+        { text: "Дефектолог в инклюзивном образовании выполняет функцию:", options: ["Коррекционно-развивающей помощи", "Административного контроля", "Оценивания", "Формального учёта"], correct: "Коррекционно-развивающей помощи" },
+        { text: "Основная задача коррекционного педагога:", options: ["Поддержка развития ребёнка", "Контроль знаний", "Администрирование", "Изоляция"], correct: "Поддержка развития ребёнка" },
+        { text: "Взаимодействие педагога и дефектолога направлено на:", options: ["Повышение эффективности обучения", "Контроль", "Формализм", "Сегрегацию"], correct: "Повышение эффективности обучения" },
+        { text: "Психолог в инклюзивной школе отвечает за:", options: ["Эмоциональное благополучие детей", "Контроль знаний", "Администрирование", "Медицинское лечение"], correct: "Эмоциональное благополучие детей" },
+        { text: "Профориентация детей с ОВЗ в инклюзии направлена на:", options: ["Осознанный выбор профессии", "Случайный выбор", "Формальный подход", "Ограничение возможностей"], correct: "Осознанный выбор профессии" },
+        { text: "При выборе профессии учитывается:", options: ["Состояние здоровья", "Мнение друзей", "Случай", "Мода"], correct: "Состояние здоровья" },
+        { text: "Важным фактором выбора профессии является:", options: ["Интерес ребёнка", "Формальный престиж", "Случай", "Давление окружения"], correct: "Интерес ребёнка" },
+        { text: "Профессиональное самоопределение способствует:", options: ["Социальной реализации", "Изоляции", "Формализму", "Контролю"], correct: "Социальной реализации" },
+        { text: "Поддержка при выборе профессии включает:", options: ["Консультирование специалистов", "Формальный совет", "Ограничение выбора", "Контроль"], correct: "Консультирование специалистов" },
+        { text: "Дистанционное обучение в госпитальной педагогике используется для:", options: ["Продолжения образования", "Контроля лечения", "Отбора учеников", "Отбора учеников"], correct: "Продолжения образования" },
+        { text: "Инклюзивная среда снижает уровень:", options: ["Социальной стигматизации", "Общения", "Контактов", "Поддержки"], correct: "Социальной стигматизации" },
+        { text: "Социальная адаптация происходит через:", options: ["Общение и сотрудничество", "Изоляцию", "Контроль", "Формализм"], correct: "Общение и сотрудничество" },
+        { text: "Госпитальная педагогика применяется для детей:", options: ["Нуждающихся в длительном лечении", "Только с инвалидностью", "Только дошкольников", "Только подростков"], correct: "Нуждающихся в длительном лечении" },
+        { text: "Основная цель госпитальной педагогики:", options: ["Непрерывность образования", "Контроль", "Формальный процесс", "Изоляция"], correct: "Непрерывность образования" },
+        { text: "Госпитальный педагог должен учитывать:", options: ["Состояние здоровья ребёнка", "Только программу", "Административные требования", "Формальный план"], correct: "Состояние здоровья ребёнка" },
+        { text: "Медико-реабилитационная диагностика детей включает:", options: ["Оценку физического состояния", "Только контроль", "Формализм", "Изоляцию"], correct: "Оценку физического состояния" },
+        { text: "Диагностика в госпитальной педагогике направлена на:", options: ["Определение возможностей обучения", "Контроль", "Исключение", "Формальный учёт"], correct: "Определение возможностей обучения" },
+        { text: "Междисциплинарность предполагает участие:", options: ["Педагогов, врачей и психологов", "Только педагогов", "Только врачей", "Только администрации"], correct: "Педагогов, врачей и психологов" },
+        { text: "Междисциплинарный подход в школе обеспечивает:", options: ["Комплексную помощь", "Формализм", "Разрозненность", "Контроль"], correct: "Комплексную помощь" },
+        { text: "Основой междисциплинарного взаимодействия является:", options: ["Сотрудничество", "Подчинение", "Конкуренция", "Изоляция"], correct: "Сотрудничество" },
+        { text: "Госпитальная педагогика как наука изучает:", options: ["Обучение детей в условиях лечения", "Только медицину", "Только психологию", "Только управление"], correct: "Обучение детей в условиях лечения" },
+        { text: "История госпитальной педагогики связана с:", options: ["Развитием прав ребёнка", "Контролем", "Формализмом", "Сегрегацией"], correct: "Развитием прав ребёнка" },
+        { text: "Методологической основой госпитальной педагогики человечества является:", options: ["Гуманистический подход", "Авторитаризм", "Контроль", "Унификация"], correct: "Гуманистический подход" },
+        { text: "Творческий подход в госпитальной педагогике направлен на:", options: ["Поддержку эмоционального состояния", "Контроль", "Формализм", "Изоляцию"], correct: "Поддержку эмоционального состояния" },
+        { text: "Творческие задания способствуют:", options: ["Повышению мотивации к обучению", "Утомлению", "Формализму", "Отказу от учёбы"], correct: "Повышению мотивации к обучению" },
+        { text: "Использование искусства в обучении помогает:", options: ["Снижать стресс", "Контролировать", "Формализовать процесс", "Ограничивать"], correct: "Снижать стресс" },
+        { text: "Концепция здоровья включает:", options: ["Физическое и психическое благополучие", "Только отсутствие болезни", "Диагноз", "Контроль"], correct: "Физическое и психическое благополучие" },
+        { text: "В настоящее время многие проблемы здоровья детей связаны с:", options: ["Перегрузками и стрессом", "Только наследственностью", "Учебниками", "Дисциплиной"], correct: "Перегрузками и стрессом" },
+        { text: "В госпитальных школах здоровьесберегающие технологии направлены на:", options: ["Сохранение и укрепление здоровья", "Повышение нагрузки", "Контроль", "Формализм"], correct: "Сохранение и укрепление здоровья" },
+        { text: "Рациональная организация учебного процесса школы предполагает:", options: ["Учет возрастных особенностей", "Максимальную нагрузку", "Формализм", "Контроль"], correct: "Учет возрастных особенностей" },
+        { text: "Участники госпитальной школы включают:", options: ["Педагогов, врачей и родителей", "Только педагогов", "Только врачей", "Только администрацию"], correct: "Педагогов, врачей и родителей" },
+        { text: "Взаимозависимость участников обеспечивает:", options: ["Целостность образовательного процесса", "Формализм", "Разобщённость", "Контроль"], correct: "Целостность образовательного процесса" },
+        { text: "Учитель «Мехрли Мактаб» должен владеть:", options: ["Инклюзивными компетенциями", "Только предметными знаниями", "Контрольными функциями", "Административными навыками"], correct: "Инклюзивными компетенциями" },
+        { text: "Формирование компетенций педагогов осуществляется через:", options: ["Профессиональное обучение", "Формальные отчёты", "Контроль", "Случайный опыт"], correct: "Профессиональное обучение" },
+        { text: "Основная функция ПМПК:", options: ["Оценка образовательных потребностей", "Лечение", "Контроль дисциплины", "Формализма"], correct: "Оценка образовательных потребностей" },
+        { text: "Основная задача комиссии:", options: ["Защита интересов ребёнка", "Формальный контроль", "Сегрегация", "Администрирование"], correct: "Защита интересов ребёнка" },
+        { text: "Решения комиссии основаны на:", options: ["Комплексной оценке", "Формальности", "Контроле", "Случайности"], correct: "Комплексной оценке" },
+        { text: "Инклюзивное образование в обществе способствует:", options: ["Социальной справедливости", "Конкуренции", "Изоляции", "Формализму"], correct: "Социальной справедливости" }
+    ];
+
+    let questions = [];
+    let currentIndex = 0, correct = 0, wrong = 0, isAnswered = false, selectedOpt = null, mistakes = [];
+    let currentQ = null;
+    let intervalId = null;
+
+    const quotesGeneral = [
+        "✨ Инклюзия – это про любовь и принятие.",
+        "📚 Каждый ребёнок заслуживает качественное образование.",
+        "🌌 Госпитальная педагогика дарит надежду.",
+        "🧠 Доступная среда – право, а не привилегия.",
+        "💡 Мы все разные, и это прекрасно.",
+        "🌟 Вместе мы сильнее.",
+        "📖 Сегодня ты учишь, завтра – меняешь мир.",
+        "🎓 Профессионализм и доброта – основа инклюзии.",
+        "🚀 Знания не имеют границ.",
+        "✨ Ошибка – это шаг к успеху."
+    ];
+
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function prepareQuestions() {
+        questions = questionsData.map(q => {
+            let shuffledOpts = shuffleArray([...q.options]);
+            return { text: q.text, options: shuffledOpts, correct: q.correct };
+        });
+    }
+
+    function updateQuote() {
+        let r = Math.floor(Math.random() * quotesGeneral.length);
+        document.getElementById("inspireBox").innerHTML = `<span class="motivation-text">✨ ${quotesGeneral[r]} ✨</span>`;
+    }
+    function startQuotes() { if(intervalId) clearInterval(intervalId); updateQuote(); intervalId = setInterval(updateQuote, 10000); }
+
+    function updateStats() {
+        let answered = correct + wrong;
+        document.getElementById("answeredCount").innerText = answered;
+        document.getElementById("remainingCount").innerText = 50 - answered;
+        let acc = answered === 0 ? 0 : Math.round((correct / answered) * 100);
+        document.getElementById("accuracyPercent").innerText = acc;
+        document.getElementById("correctCount").innerText = correct;
+        document.getElementById("mistakeCount").innerText = wrong;
+        let percent = (answered / 50) * 100;
+        document.getElementById("progressFill").style.width = percent + "%";
+        document.getElementById("progressFraction").innerText = `${answered}/50`;
+    }
+
+    function renderOptions() {
+        if(!currentQ) return;
+        let letters = ['A','B','C','D'];
+        let cont = document.getElementById("optionsContainer");
+        cont.innerHTML = "";
+        currentQ.options.forEach((opt, idx) => {
+            let div = document.createElement("div");
+            div.className = "option";
+            div.innerHTML = `<span class="opt-letter">${letters[idx]}</span> ${opt}`;
+            div.onclick = () => {
+                if(isAnswered) { document.getElementById("feedbackArea").innerHTML = "⚠️ Уже проверено. Жми «Следующий»."; return; }
+                document.querySelectorAll(".option").forEach(el => el.classList.remove("selected"));
+                div.classList.add("selected");
+                selectedOpt = opt;
+            };
+            cont.appendChild(div);
+        });
+    }
+
+    function loadQuestion() {
+        if(currentIndex >= questions.length) {
+            document.getElementById("questionDisplay").innerText = "🎉 Блок 201–250 завершён! Поздравляем! 🎉";
+            document.getElementById("optionsContainer").innerHTML = "";
+            document.getElementById("feedbackArea").innerHTML = "✨ Посмотрите ошибки и переходите к следующему блоку ✨";
+            document.getElementById("checkBtn").disabled = true;
+            document.getElementById("nextBtn").disabled = true;
+            document.getElementById("reviewBlock").classList.remove("hidden");
+            let mistakesDiv = document.getElementById("mistakeList");
+            mistakesDiv.innerHTML = "";
+            if(mistakes.length === 0) mistakesDiv.innerHTML = "<p>✨ Идеально! Вы – знаток инклюзивного образования!</p>";
+            else mistakes.forEach(m => mistakesDiv.innerHTML += `<div class="mistake-item">❓ ${m.question}<br>👉 Ваш ответ: ${m.userAnswer}<br>✅ Правильно: ${m.correctAnswer}</div>`);
+            return;
+        }
+        currentQ = questions[currentIndex];
+        document.getElementById("questionDisplay").innerText = currentQ.text;
+        selectedOpt = null; isAnswered = false;
+        renderOptions();
+        document.getElementById("feedbackArea").innerHTML = "✨ Выбери ответ → «Проверить» ✨";
+        document.getElementById("checkBtn").disabled = false;
+        document.getElementById("nextBtn").disabled = false;
+        updateStats();
+    }
+
+    function checkAnswer() {
+        if(!selectedOpt) { document.getElementById("feedbackArea").innerHTML = "⚠️ Выбери вариант!"; return; }
+        if(isAnswered) return;
+        if(selectedOpt === currentQ.correct) {
+            document.getElementById("feedbackArea").innerHTML = `✅ Верно! «${selectedOpt}» — отлично!`;
+            correct++;
+        } else {
+            document.getElementById("feedbackArea").innerHTML = `❌ Неверно. Правильный ответ: «${currentQ.correct}».`;
+            wrong++;
+            mistakes.push({ question: currentQ.text, userAnswer: selectedOpt, correctAnswer: currentQ.correct });
+        }
+        isAnswered = true;
+        updateStats();
+    }
+
+    function nextQuestion() {
+        if(!isAnswered) { document.getElementById("feedbackArea").innerHTML = "⚠️ Сначала проверь ответ."; return; }
+        currentIndex++;
+        loadQuestion();
+    }
+
+    function restart() {
+        prepareQuestions();
+        currentIndex = 0; correct = 0; wrong = 0; mistakes = []; isAnswered = false; selectedOpt = null;
+        document.getElementById("reviewBlock").classList.add("hidden");
+        loadQuestion();
+        updateStats();
+    }
+
+    function startQuiz() {
+        prepareQuestions();
+        document.getElementById("startScreen").classList.add("hidden");
+        document.getElementById("quizInterface").classList.remove("hidden");
+        startQuotes();
+        restart();
+    }
+
+    document.getElementById("startBtn").onclick = startQuiz;
+    document.getElementById("checkBtn").onclick = checkAnswer;
+    document.getElementById("nextBtn").onclick = nextQuestion;
+    document.getElementById("restartBtn").onclick = restart;
+    document.getElementById("restartReviewBtn").onclick = restart;
+</script>
+</body>
+</html>

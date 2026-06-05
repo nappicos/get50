@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🚀 Инклюзивное образование · Блок 6 (251–300) · Космический тест</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(ellipse at 30% 40%, #010110, #000000);
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .star {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: starGlow 4s infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes starGlow {
+            0% { opacity: 0.2; transform: scale(0.8); box-shadow: 0 0 2px #fff; }
+            100% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 12px #ffec9e; }
+        }
+        .planet { position: fixed; font-size: 3rem; pointer-events: none; z-index: 0; filter: drop-shadow(0 0 15px cyan); }
+        .earth { top: 15%; left: 5%; animation: floatEarth 20s infinite alternate; }
+        .moon { bottom: 10%; right: 5%; animation: floatMoon 18s infinite alternate; }
+        .mars { top: 60%; left: 85%; animation: floatMars 22s infinite alternate; }
+        .rocket { position: fixed; bottom: 5%; left: 2%; font-size: 3rem; pointer-events: none; animation: flyRocket 20s infinite linear; z-index: 0; }
+        @keyframes floatEarth { 0% { transform: translate(0,0); } 100% { transform: translate(40px,30px); } }
+        @keyframes floatMoon { 0% { transform: translate(0,0); } 100% { transform: translate(-30px,-20px); } }
+        @keyframes floatMars { 0% { transform: translate(0,0); } 100% { transform: translate(50px,-30px); } }
+        @keyframes flyRocket { 0% { transform: translateX(0) translateY(0); } 100% { transform: translateX(1800px) translateY(-300px); } }
+        .quiz-wrapper {
+            max-width: 1000px; width: 100%; margin: 0 auto;
+            background: rgba(3, 8, 20, 0.7); backdrop-filter: blur(12px);
+            border-radius: 70px; padding: 1.8rem 2rem;
+            border: 2px solid rgba(0, 200, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(0,150,255,0.4);
+            z-index: 2;
+        }
+        h1 { font-size: 2rem; background: linear-gradient(135deg,#aaddff,#3388ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .top-bar { display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; }
+        .stats { display: flex; gap: 12px; background: #0a1020cc; border-radius: 70px; padding: 10px 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .stat-card { background: #0a1a2a; padding: 7px 18px; border-radius: 40px; color: #ddf4ff; }
+        .progress-area { display: flex; gap: 18px; margin: 15px 0; align-items: center; flex-wrap: wrap; }
+        .progress-bar-bg { flex:1; background: #1a2a3a; height: 28px; border-radius: 60px; overflow: hidden; }
+        .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg,#44aaff,#2288cc); transition: width 0.5s; }
+        .question-card { background: #0a1022ee; border-radius: 52px; padding: 28px; border: 1px solid #44aaff; }
+        .question-text { font-size: 1.5rem; background: #11223c; border-radius: 60px; padding: 20px; text-align: center; margin-bottom: 25px; color: #f0fcff; }
+        .options { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+        .option { background: #1a2a3e; border: 1px solid #5599dd; border-radius: 80px; padding: 12px 24px; cursor: pointer; color: #e6f7ff; display: flex; gap: 18px; align-items: center; }
+        .option.selected { background: #3a5a80; border-color: #aaffff; box-shadow: 0 0 12px cyan; }
+        .opt-letter { font-weight: bold; background: #0a1a2a; width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 60px; }
+        .feedback { background: #051020; border-radius: 56px; padding: 16px 28px; margin: 15px 0 20px; font-size: 1.2rem; font-weight: bold; text-align: center; border: 1px solid #00ffff; color: #00ffff; text-shadow: 0 0 8px #00ffff, 0 0 12px #0088ff; box-shadow: 0 0 15px rgba(0,255,255,0.3); }
+        .btn { border: none; padding: 12px 34px; border-radius: 60px; font-weight: bold; font-size: 1.1rem; cursor: pointer; color: white; margin: 5px; }
+        .btn-check { background: #0066cc; box-shadow: 0 0 12px #00aaff, 0 4px 0 #003366; }
+        .btn-check:hover { background: #0088ff; box-shadow: 0 0 20px #00aaff; }
+        .btn-next { background: #0099cc; box-shadow: 0 0 12px #00ffff, 0 4px 0 #006699; }
+        .btn-next:hover { background: #00bbff; box-shadow: 0 0 20px #00ffff; }
+        .btn-restart { background: #3a2a6e; box-shadow: 0 4px 0 #1a1a4a; }
+        .hidden { display: none; }
+        .review { background: #0a1022ee; border-radius: 52px; padding: 28px; margin-top: 30px; }
+        .mistake-item { background: #1a2a40; padding: 12px; border-radius: 40px; margin-bottom: 10px; color: #ddf4ff; }
+        .inspire { background: rgba(10,20,40,0.8); border-radius: 60px; padding: 14px; text-align: center; margin-bottom: 20px; border: 1px solid cyan; }
+        .motivation-text { font-size: 1rem; font-style: italic; color: #cceeff; }
+        @media (max-width: 768px) { .quiz-wrapper { padding: 1rem; } .question-text { font-size: 1.2rem; } }
+    </style>
+</head>
+<body>
+<div class="planet earth">🌍</div><div class="planet moon">🌙</div><div class="planet mars">🪐</div>
+<div class="rocket">🚀</div>
+<script>
+    for(let i=0;i<150;i++){let s=document.createElement('div');s.classList.add('star');let sz=Math.random()*3+1;s.style.width=sz+'px';s.style.height=sz+'px';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*6+'s';document.body.appendChild(s);}
+</script>
+
+<div class="quiz-wrapper" id="quizMain">
+    <div class="top-bar"><h1>🏥 Инклюзивное образование · 251–300</h1><div>📘 Всего 50</div></div>
+    <div class="inspire" id="inspireBox"><span class="motivation-text">✨ Добро пожаловать в тест! ✨</span></div>
+    <div id="startScreen" style="text-align:center; padding:50px 0;"><button class="btn btn-check" id="startBtn" style="font-size:2rem;">🌌 Начать тест 🚀</button></div>
+    <div id="quizInterface" class="hidden">
+        <div class="stats"><div class="stat-card">✅ Верно: <span id="correctCount">0</span></div><div class="stat-card">❌ Ошибки: <span id="mistakeCount">0</span></div><div class="stat-card">🎯 Точность: <span id="accuracyPercent">0</span>%</div><div class="stat-card">📝 Отвечено: <span id="answeredCount">0</span></div><div class="stat-card">🌌 Осталось: <span id="remainingCount">50</span></div></div>
+        <div class="progress-area"><div class="progress-bar-bg"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text" id="progressFraction">0/50</div></div>
+        <div class="question-card"><div class="question-text" id="questionDisplay"></div><div class="options" id="optionsContainer"></div><div class="feedback" id="feedbackArea">✨ Выбери ответ → «Проверить» ✨</div><div class="button-group"><button class="btn btn-check" id="checkBtn">✅ Проверить</button><button class="btn btn-next" id="nextBtn">➡ Следующий</button></div></div>
+        <div class="restart-area"><button class="btn btn-restart" id="restartBtn">🔄 Начать заново</button></div>
+        <div id="reviewBlock" class="review hidden"><h3 style="color:#aaffdd;">📖 Разбор ошибок</h3><div id="mistakeList"></div><button class="btn btn-restart" id="restartReviewBtn">🚀 Пройти заново</button></div>
+    </div>
+</div>
+
+<script>
+    const questionsData = [
+        { text: "Инклюзия формирует у детей:", options: ["Толерантное мышление", "Соревновательность", "Изоляцию", "Контроль"], correct: "Толерантное мышление" },
+        { text: "Эмоциональная поддержка в госпитальной педагогике необходима для", options: ["Снижения тревожности", "Повышения контроля", "Ужесточения требований", "Ограничения общения"], correct: "Снижения тревожности" },
+        { text: "Инклюзивное обучение предполагает:", options: ["Гибкость методов обучения", "Жесткую программу", "Единые требования", "Унификацию"], correct: "Гибкость методов обучения" },
+        { text: "Госпитальная школа помогает ребенку:", options: ["Сохранить связь с обычной школой", "Отказаться от обучения", "Изолироваться", "Сменить профессию"], correct: "Сохранить связь с обычной школой" },
+        { text: "В госпитальной педагогике важна роль", options: ["Поддерживающей образовательной среды", "Отбор", "Контроль", "Строгой дисциплины"], correct: "Поддерживающей образовательной среды" },
+        { text: "Инклюзивный педагог в своей работе руководствуется", options: ["Правами человека", "Привилегией", "Формальностью", "Исключением"], correct: "Правами человека" },
+        { text: "В основе инклюзивного образования лежит принцип:", options: ["Недискриминации", "Привилегии", "Формализм", "Соревнование"], correct: "Недискриминации" },
+        { text: "Важнейший принцип госпитальной педагогики:", options: ["Индивидуальный подход", "Формальный", "Привилегия", "Сравнение"], correct: "Индивидуальный подход" },
+        { text: "В инклюзивной практике педагог сотрудничает с", options: ["Психологами, логопедами и врачами", "Привилегией", "врач", "логопед"], correct: "Психологами, логопедами и врачами" },
+        { text: "Принцип инклюзии:", options: ["Адаптация среды под потребности ребенка", "Формальность", "Стандартным", "Формальным"], correct: "Адаптация среды под потребности ребенка" },
+        { text: "Инклюзивное образование помогает", options: ["Развивать толерантность", "Контролёра", "Администратора", "Наблюдателя"], correct: "Развивать толерантность" },
+        { text: "Междисциплинарная команда работает ради:", options: ["Благополучия ребёнка", "Формализма", "Контроля", "Сегрегации"], correct: "Благополучия ребёнка" },
+        { text: "Творческое обучение помогает:", options: ["Сохранять интерес к учёбе", "Утомлять", "Формализовать процесс", "Ограничивать"], correct: "Сохранять интерес к учёбе" },
+        { text: "В инклюзивном классе важно:", options: ["Поддерживать разнообразие", "Лечение", "Контроль", "Формализм"], correct: "Поддерживать разнообразие" },
+        { text: "Инклюзивная школа строится на принципе", options: ["Равноправия", "Только наследственности", "Случая", "Дисциплины"], correct: "Равноправия" },
+        { text: "Инклюзивное образование всегда формирует:", options: ["Гуманное общество", "Конкуренцию", "Сегрегацию", "Контроль"], correct: "Гуманное общество" },
+        { text: "Взаимодействие семьи и школы способствует:", options: ["Успешному развитию ребёнка", "Формализму", "Контролю", "Изоляции"], correct: "Успешному развитию ребёнка" },
+        { text: "Важная компетенция госпитального педагога", options: ["Эмпатия", "Наблюдателями", "Контролёрами", "Администраторами"], correct: "Эмпатия" },
+        { text: "Индивидуальный образовательный маршрут разрабатывается:", options: ["С учётом особенностей ребёнка", "Формально", "Случайно", "Без диагностики"], correct: "С учётом особенностей ребёнка" },
+        { text: "Оценивание в инклюзии должно быть:", options: ["Поддерживающим", "Карательным", "Формальным", "Сравнительным"], correct: "Поддерживающим" },
+        { text: "Инклюзивное образование способствует развитию детей:", options: ["Самооценки", "Зависимости", "Изоляции", "Контроля"], correct: "Самооценки" },
+        { text: "Инклюзия направлена на:", options: ["Социальную сплочённость", "Разделение", "Сегрегацию", "Контроль"], correct: "Социальную сплочённость" },
+        { text: "Госпитальная школа обеспечивает детей:", options: ["Доступ к образованию", "Изоляцию", "Контроль", "Формализм"], correct: "Доступ к образованию" },
+        { text: "Госпитальное обучение учитывает:", options: ["Индивидуальные возможности", "Только программу", "Формальный план", "Контроль"], correct: "Индивидуальные возможности" },
+        { text: "Совместное обучение развивает:", options: ["Навыки сотрудничества", "Формализм", "Изоляцию", "Соперничество"], correct: "Навыки сотрудничества" },
+        { text: "Инклюзивная школа детей ОВЗ ориентирована на:", options: ["Развитие личности", "Формальный результат", "Контроль", "Унификацию"], correct: "Развитие личности" },
+        { text: "Эффективность инклюзивного образования зависит от:", options: ["Командной работы специалистов", "Формализма", "Контроля", "Изоляции"], correct: "Командной работы специалистов" },
+        { text: "Государственная политика в инклюзии направлена на:", options: ["Равный доступ к образованию", "Отбор", "Контроль", "Сегрегацию"], correct: "Равный доступ к образованию" },
+        { text: "Адаптация -- это:", options: ["Приспособление организма к изменяющимся условиям, изменение чувствительности анализаторов под воздействием факторов среды", "Раздел педагогики, связанный с организацией обучения детей, находящихся на длительном лечении и не посещающих образовательные учреждения по состоянию здоровья", "Начало острое -- дрожь, высокая температура, слабость, летаргия, головная боль. Ринит сопровождается прозрачными выделениями и кашлем", "Дети с задержкой психического и физического развития, нуждающиеся в специальном обучении"], correct: "Приспособление организма к изменяющимся условиям, изменение чувствительности анализаторов под воздействием факторов среды" },
+        { text: "Основной результат инклюзивного обучения даёт:", options: ["Социальная интеграция", "Формальный документ", "Контроль", "Сравнение"], correct: "Социальная интеграция" },
+        { text: "Госпитальная педагогика поддерживает:", options: ["Образовательную мотивацию", "Контроль", "Формализм", "Изоляцию"], correct: "Образовательную мотивацию" },
+        { text: "Обучение в условиях лечения должно быть:", options: ["Гибким", "Жёстким", "Стандартным", "Формальным"], correct: "Гибким" },
+        { text: "Госпитальный педагог выполняет роль:", options: ["Поддерживающего наставника", "Контролёра", "Администратора", "Наблюдателя"], correct: "Поддерживающего наставника" },
+        { text: "Междисциплинарная команда винклюзии работает ради:", options: ["Благополучия ребёнка", "Формализма", "Контроля", "Сегрегации"], correct: "Благополучия ребёнка" },
+        { text: "Творческая инклюзия помогает:", options: ["Сохранять интерес к учёбе", "Утомлять", "Формализовать процесс", "Ограничивать"], correct: "Сохранять интерес к учёбе" },
+        { text: "Современная педагогика здоровья ориентирована на:", options: ["Профилактику", "Лечение", "Контроль", "Формализм"], correct: "Профилактику" },
+        { text: "Здоровье ребёнка зависит от:", options: ["Условий обучения", "Только наследственности", "Случая", "Дисциплины"], correct: "Условий обучения" },
+        { text: "В настоящее время инклюзивное образование формирует:", options: ["Гуманное общество", "Конкуренцию", "Сегрегацию", "Контроль"], correct: "Гуманное общество" },
+        { text: "Взаимодействие работы семьи и школы способствует:", options: ["Успешному развитию ребёнка", "Формализму", "Контролю", "Изоляции"], correct: "Успешному развитию ребёнка" },
+        { text: "Родители в инклюзии являются:", options: ["Партнёрами педагогов", "Наблюдателями", "Контролёрами", "Администраторами"], correct: "Партнёрами педагогов" },
+        { text: "Оценивание в инклюзивных клласах должно быть:", options: ["Поддерживающим", "Карательным", "Формальным", "Сравнительным"], correct: "Поддерживающим" },
+        { text: "Успешность обучения определяется:", options: ["Личным прогрессом", "Средним баллом", "Формальным нормативом", "Сравнением"], correct: "Личным прогрессом" },
+        { text: "Аффективные расстройства -- это?", options: ["Нарушения психики", "Быстрая смена настроения, слабость, нарушения сна и вегетативной сферы", "Слабослышащие", "Задержка умственного развития."], correct: "Быстрая смена настроения, слабость, нарушения сна и вегетативной сферы" },
+        { text: "В школах инклюзивного типа формирует:", options: ["Культуру принятия", "Конкуренцию", "Сегрегацию", "Контроль"], correct: "Культуру принятия" },
+        { text: "Основная задача инклюзивной школы:", options: ["Развитие каждого ребёнка", "Отбор", "Контроль", "Сравнение"], correct: "Развитие каждого ребёнка" },
+        { text: "Инклюзивная практика требует от специалиста:", options: ["Профессиональной подготовки", "Формализма", "Контроля", "Изоляции"], correct: "Профессиональной подготовки" },
+        { text: "Инклюзия в обществе направлена на:", options: ["Социальную сплочённость", "Разделение", "Сегрегацию", "Контроль"], correct: "Социальную сплочённость" },
+        { text: "Образование детей с ОВЗ способствует:", options: ["Самореализации", "Формальному результату", "Контролю", "Унификации"], correct: "Самореализации" },
+        { text: "Основная ценность госпитальной педагогики:", options: ["Поддержка личности ребёнка", "Формализм", "Контроль", "Сравнение"], correct: "Поддержка личности ребёнка" }
+    ];
+
+    let questions = [];
+    let currentIndex = 0, correct = 0, wrong = 0, isAnswered = false, selectedOpt = null, mistakes = [];
+    let currentQ = null;
+    let intervalId = null;
+
+    const quotesGeneral = [
+        "✨ Инклюзия – это про любовь и принятие.",
+        "📚 Каждый ребёнок заслуживает качественное образование.",
+        "🌌 Госпитальная педагогика дарит надежду.",
+        "🧠 Доступная среда – право, а не привилегия.",
+        "💡 Мы все разные, и это прекрасно.",
+        "🌟 Вместе мы сильнее.",
+        "📖 Сегодня ты учишь, завтра – меняешь мир.",
+        "🎓 Профессионализм и доброта – основа инклюзии.",
+        "🚀 Знания не имеют границ.",
+        "✨ Ошибка – это шаг к успеху."
+    ];
+
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function prepareQuestions() {
+        questions = questionsData.map(q => {
+            let shuffledOpts = shuffleArray([...q.options]);
+            return { text: q.text, options: shuffledOpts, correct: q.correct };
+        });
+    }
+
+    function updateQuote() {
+        let r = Math.floor(Math.random() * quotesGeneral.length);
+        document.getElementById("inspireBox").innerHTML = `<span class="motivation-text">✨ ${quotesGeneral[r]} ✨</span>`;
+    }
+    function startQuotes() { if(intervalId) clearInterval(intervalId); updateQuote(); intervalId = setInterval(updateQuote, 10000); }
+
+    function updateStats() {
+        let answered = correct + wrong;
+        document.getElementById("answeredCount").innerText = answered;
+        document.getElementById("remainingCount").innerText = 50 - answered;
+        let acc = answered === 0 ? 0 : Math.round((correct / answered) * 100);
+        document.getElementById("accuracyPercent").innerText = acc;
+        document.getElementById("correctCount").innerText = correct;
+        document.getElementById("mistakeCount").innerText = wrong;
+        let percent = (answered / 50) * 100;
+        document.getElementById("progressFill").style.width = percent + "%";
+        document.getElementById("progressFraction").innerText = `${answered}/50`;
+    }
+
+    function renderOptions() {
+        if(!currentQ) return;
+        let letters = ['A','B','C','D'];
+        let cont = document.getElementById("optionsContainer");
+        cont.innerHTML = "";
+        currentQ.options.forEach((opt, idx) => {
+            let div = document.createElement("div");
+            div.className = "option";
+            div.innerHTML = `<span class="opt-letter">${letters[idx]}</span> ${opt}`;
+            div.onclick = () => {
+                if(isAnswered) { document.getElementById("feedbackArea").innerHTML = "⚠️ Уже проверено. Жми «Следующий»."; return; }
+                document.querySelectorAll(".option").forEach(el => el.classList.remove("selected"));
+                div.classList.add("selected");
+                selectedOpt = opt;
+            };
+            cont.appendChild(div);
+        });
+    }
+
+    function loadQuestion() {
+        if(currentIndex >= questions.length) {
+            document.getElementById("questionDisplay").innerText = "🎉 Блок 251–300 завершён! Поздравляем! 🎉";
+            document.getElementById("optionsContainer").innerHTML = "";
+            document.getElementById("feedbackArea").innerHTML = "✨ Посмотрите ошибки и переходите к следующему блоку ✨";
+            document.getElementById("checkBtn").disabled = true;
+            document.getElementById("nextBtn").disabled = true;
+            document.getElementById("reviewBlock").classList.remove("hidden");
+            let mistakesDiv = document.getElementById("mistakeList");
+            mistakesDiv.innerHTML = "";
+            if(mistakes.length === 0) mistakesDiv.innerHTML = "<p>✨ Идеально! Вы – знаток инклюзивного образования!</p>";
+            else mistakes.forEach(m => mistakesDiv.innerHTML += `<div class="mistake-item">❓ ${m.question}<br>👉 Ваш ответ: ${m.userAnswer}<br>✅ Правильно: ${m.correctAnswer}</div>`);
+            return;
+        }
+        currentQ = questions[currentIndex];
+        document.getElementById("questionDisplay").innerText = currentQ.text;
+        selectedOpt = null; isAnswered = false;
+        renderOptions();
+        document.getElementById("feedbackArea").innerHTML = "✨ Выбери ответ → «Проверить» ✨";
+        document.getElementById("checkBtn").disabled = false;
+        document.getElementById("nextBtn").disabled = false;
+        updateStats();
+    }
+
+    function checkAnswer() {
+        if(!selectedOpt) { document.getElementById("feedbackArea").innerHTML = "⚠️ Выбери вариант!"; return; }
+        if(isAnswered) return;
+        if(selectedOpt === currentQ.correct) {
+            document.getElementById("feedbackArea").innerHTML = `✅ Верно! «${selectedOpt}» — отлично!`;
+            correct++;
+        } else {
+            document.getElementById("feedbackArea").innerHTML = `❌ Неверно. Правильный ответ: «${currentQ.correct}».`;
+            wrong++;
+            mistakes.push({ question: currentQ.text, userAnswer: selectedOpt, correctAnswer: currentQ.correct });
+        }
+        isAnswered = true;
+        updateStats();
+    }
+
+    function nextQuestion() {
+        if(!isAnswered) { document.getElementById("feedbackArea").innerHTML = "⚠️ Сначала проверь ответ."; return; }
+        currentIndex++;
+        loadQuestion();
+    }
+
+    function restart() {
+        prepareQuestions();
+        currentIndex = 0; correct = 0; wrong = 0; mistakes = []; isAnswered = false; selectedOpt = null;
+        document.getElementById("reviewBlock").classList.add("hidden");
+        loadQuestion();
+        updateStats();
+    }
+
+    function startQuiz() {
+        prepareQuestions();
+        document.getElementById("startScreen").classList.add("hidden");
+        document.getElementById("quizInterface").classList.remove("hidden");
+        startQuotes();
+        restart();
+    }
+
+    document.getElementById("startBtn").onclick = startQuiz;
+    document.getElementById("checkBtn").onclick = checkAnswer;
+    document.getElementById("nextBtn").onclick = nextQuestion;
+    document.getElementById("restartBtn").onclick = restart;
+    document.getElementById("restartReviewBtn").onclick = restart;
+</script>
+</body>
+</html>

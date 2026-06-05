@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🚀 Инклюзивное образование · Госпитальная педагогика</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(ellipse at 30% 40%, #010110, #000000);
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* stars and planets animation */
+        .star {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: starGlow 4s infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes starGlow {
+            0% { opacity: 0.2; transform: scale(0.8); box-shadow: 0 0 2px #fff; }
+            100% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 12px #ffec9e; }
+        }
+        .planet { position: fixed; font-size: 3rem; pointer-events: none; z-index: 0; filter: drop-shadow(0 0 15px cyan); }
+        .earth { top: 15%; left: 5%; animation: floatEarth 20s infinite alternate; }
+        .moon { bottom: 10%; right: 5%; animation: floatMoon 18s infinite alternate; }
+        .mars { top: 60%; left: 85%; animation: floatMars 22s infinite alternate; }
+        .rocket { position: fixed; bottom: 5%; left: 2%; font-size: 3rem; pointer-events: none; animation: flyRocket 20s infinite linear; z-index: 0; }
+        @keyframes floatEarth { 0% { transform: translate(0,0); } 100% { transform: translate(40px,30px); } }
+        @keyframes floatMoon { 0% { transform: translate(0,0); } 100% { transform: translate(-30px,-20px); } }
+        @keyframes floatMars { 0% { transform: translate(0,0); } 100% { transform: translate(50px,-30px); } }
+        @keyframes flyRocket { 0% { transform: translateX(0) translateY(0); } 100% { transform: translateX(1800px) translateY(-300px); } }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #aaddff, #3388ff, #ff66cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0,200,255,0.3);
+        }
+        .subhead {
+            font-size: 1.2rem;
+            color: #bbddff;
+            margin-top: 0.5rem;
+            border-top: 1px solid rgba(0,200,255,0.5);
+            display: inline-block;
+            padding-top: 0.5rem;
+        }
+        .info-card {
+            background: rgba(10,20,40,0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid cyan;
+            box-shadow: 0 0 20px rgba(0,255,255,0.2);
+        }
+        .info-card p {
+            color: #cceeff;
+            font-size: 1rem;
+        }
+        .blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .block-card {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #44aaff;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .block-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px cyan;
+            border-color: cyan;
+        }
+        .block-range {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #aaffff;
+            background: #0a1a2a;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+        }
+        .btn-link {
+            background: #0066cc;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .btn-link:hover {
+            background: #00aaff;
+            box-shadow: 0 0 12px cyan;
+        }
+        .exam-card {
+            background: linear-gradient(145deg, #2a1a4a, #1a0a2a);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #ff66cc;
+            margin: 1rem 0;
+        }
+        .exam-card h2 {
+            color: #ffaaff;
+            font-size: 1.8rem;
+        }
+        .exam-btn {
+            background: #ff44aa;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.5rem;
+            box-shadow: 0 0 20px #ff66cc;
+        }
+        .donate-box {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid #ffaa44;
+        }
+        .donate-btn {
+            background: #ffaa44;
+            color: #1a1a2a;
+            padding: 0.7rem 1.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.8rem;
+        }
+        footer {
+            text-align: center;
+            color: #88aaff;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 650px) {
+            .block-card { flex-direction: column; gap: 0.6rem; text-align: center; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="planet earth">🌍</div><div class="planet moon">🌙</div><div class="planet mars">🪐</div>
+<div class="rocket">🚀</div>
+<script>
+    for(let i=0;i<150;i++){let s=document.createElement('div');s.classList.add('star');let sz=Math.random()*3+1;s.style.width=sz+'px';s.style.height=sz+'px';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*6+'s';document.body.appendChild(s);}
+</script>
+<div class="container">
+    <header>
+        <h1>🚀 Инклюзивное образование<br>Госпитальная педагогика</h1>
+        <div class="subhead">506 вопросов · 10 тематических блоков + экзамен</div>
+    </header>
+
+    <div class="info-card">
+        <p>✨ Добро пожаловать в космическую подготовку! ✨<br>Выберите блок или сразу переходите к экзамену (25 случайных вопросов).</p>
+    </div>
+
+    <div class="blocks-grid">
+        <div class="block-card"><span class="block-range">📘 Блок 1 · 1–50</span><a href="block1-50.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 2 · 51–100</span><a href="block51-100.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 3 · 101–150</span><a href="block101-150.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 4 · 151–200</span><a href="block151-200.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 5 · 201–250</span><a href="block201-250.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 6 · 251–300</span><a href="block251-300.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 7 · 301–350</span><a href="block301-350.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 8 · 351–400</span><a href="block351-400.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 9 · 401–450</span><a href="block401-450.html" class="btn-link">Пройти →</a></div>
+        <div class="block-card"><span class="block-range">📘 Блок 10 · 451–506</span><a href="block451-506.html" class="btn-link">Пройти →</a></div>
+    </div>
+
+    <div class="exam-card">
+        <h2>🎓 ЭКЗАМЕН</h2>
+        <p>25 случайных вопросов из всех 506 · каждый раз новые</p>
+        <a href="exam.html" class="exam-btn">🌠 Начать экзамен 🌠</a>
+    </div>
+
+    <div class="donate-box">
+        <p>☕️ Если мои тесты помогают вам, поддержите проект</p>
+        <a href="#" class="donate-btn">Buy me a coffee</a>
+        <p style="font-size:0.7rem; margin-top:0.5rem;">(ссылка появится позже)</p>
+    </div>
+
+    <footer>
+        🌙✨ mit Liebe für alle, die lernen · Инклюзивное образование ✨🌙<br>
+        Все тесты созданы с заботой о ваших знаниях.
+    </footer>
+</div>
+</body>
+</html>

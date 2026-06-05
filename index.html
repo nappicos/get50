@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Госпитальная педагогика — тесты</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef2f7 0%, #d9e2ec 100%);
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            padding: 2rem 1rem;
+            color: #1a2c3e;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* header section */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #1e5f7a, #2c3e66);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1.1rem;
+            color: #2c5a6e;
+            border-top: 2px solid #bdd4e7;
+            display: inline-block;
+            padding-top: 0.6rem;
+        }
+
+        /* info card */
+        .info-card {
+            background: #ffffffcc;
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid #cbdde9;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1f5068;
+        }
+
+        /* blocks grid */
+        .blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .block-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            border: 1px solid #e2edf2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .block-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+            border-color: #b3d0e0;
+        }
+
+        .block-range {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1a4c66;
+            background: #eaf4f9;
+            padding: 0.2rem 0.9rem;
+            border-radius: 2rem;
+        }
+
+        .block-link {
+            background: #2c7da0;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2.5rem;
+            font-weight: 500;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .block-link:hover {
+            background: #1f5e7e;
+        }
+
+        /* footer / note */
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #cbdde9;
+            color: #3a6b84;
+            font-size: 0.85rem;
+        }
+
+        .footer-note a {
+            color: #1f5e7e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        @media (max-width: 550px) {
+            .block-card {
+                flex-direction: column;
+                gap: 0.7rem;
+                text-align: center;
+            }
+            h1 { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🏥 Госпитальная педагогика</h1>
+        <div class="subhead">тематические тесты · 506 вопросов</div>
+    </div>
+
+    <div class="info-card">
+        <p>📚 10 блоков, основанных на программе профессиональной переподготовки.<br>
+        Каждый блок открывается в отдельной странице. Удачи в подготовке!</p>
+    </div>
+
+    <div class="blocks-grid">
+        <!-- блок 1 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 1–50</span>
+            <a href="block1-50.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 2 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 51–100</span>
+            <a href="block51-100.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 3 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 101–150</span>
+            <a href="block101-150.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 4 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 151–200</span>
+            <a href="block151-200.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 5 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 201–250</span>
+            <a href="block201-250.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 6 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 251–300</span>
+            <a href="block251-300.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 7 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 301–350</span>
+            <a href="block301-350.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 8 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 351–400</span>
+            <a href="block351-400.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 9 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 401–450</span>
+            <a href="block401-450.html" class="block-link">Пройти тест →</a>
+        </div>
+        <!-- блок 10 -->
+        <div class="block-card">
+            <span class="block-range">Вопросы 451–506</span>
+            <a href="block451-506.html" class="block-link">Пройти тест →</a>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        🌿 Все тесты созданы с заботой о ваших знаниях.<br>
+        ✨ <a href="#">На главную страницу проектов</a> (обновляется)
+    </div>
+</div>
+</body>
+</html>
